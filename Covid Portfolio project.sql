@@ -129,8 +129,8 @@ from PopvsVac
 
 --TEMP TABLE
 
-DROP Table if exists #PerceentPopulationVaccinated
-create Table #PerceentPopulationVaccinated
+DROP Table if exists #PercentPopulationVaccinated
+create Table #PercentPopulationVaccinated
 (
 continent nvarchar (255),
 Location nvarchar (255),
@@ -139,7 +139,7 @@ Population numeric,
 New_Vaccinations numeric,
 RollingPeopleVaccinated numeric
 )
-insert into  #PerceentPopulationVaccinated
+insert into  #PercentPopulationVaccinated
 select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(CONVERT(Int,vac.new_vaccinations)) OVER (Partition by dea.location order by dea.location,
 dea.date ) as RollingPeopleVaccinated
@@ -152,13 +152,13 @@ join PortfolioProject..CovidVaccinations vac
 --order by 2,3
 
 select *, (RollingPeopleVaccinated/Population)*100
-from #PerceentPopulationVaccinated
+from #PercentPopulationVaccinated
 
 
 
 --Creating view to store data for later visualisations
 
-create view PerceentPopulationVaccinated as
+create view PercentPopulationVaccinated as
 select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(CONVERT(Int,vac.new_vaccinations)) OVER (Partition by dea.location order by dea.location,
 dea.date ) as RollingPeopleVaccinated
