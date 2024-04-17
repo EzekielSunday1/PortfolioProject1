@@ -6,7 +6,7 @@ from portfolioproject..Covidvaccinations
 order by 3,4
 
 
---Lets select data we are going to use
+--Select data to be used
 
 select location, date, total_cases, new_cases, total_deaths, population
 from portfolioproject..CovidDeaths
