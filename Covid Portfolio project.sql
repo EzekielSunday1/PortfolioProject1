@@ -1,3 +1,5 @@
+# Having a glance on both table
+
 select *
 from portfolioproject..CovidDeaths
 order by 3,4
